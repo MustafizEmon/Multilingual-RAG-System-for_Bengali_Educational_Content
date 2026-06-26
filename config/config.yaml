@@ -1,0 +1,122 @@
+# RAG System Configuration
+app:
+  name: "Multilingual RAG System"
+  version: "1.0.0"
+  debug: false
+
+# Document Ingestion
+ingestion:
+  ocr_backend: "paddle"  # paddle or tesseract
+  tesseract_lang: "ben"
+  render_dpi: 300
+  progress_interval: 10
+
+# Text Preprocessing
+preprocessing:
+  unicode_normalization: "NFKC"
+  remove_headers: true
+  remove_footers: true
+  remove_page_numbers: true
+  merge_paragraphs: true
+
+# Story Extraction
+story_extraction:
+  start_marker: "গল্প শুরু"
+  end_marker: "গল্প শেষ"
+  fallback_regex: "গল্প.*?(?:[\\n]{2,}|$)"
+  
+# Chunking
+chunking:
+  strategy: "recursive"  # semantic or recursive
+  chunk_size: 800
+  chunk_overlap: 120
+  separators: ["\n\n", "\n", "।", ".", "?", "!"]  
+  semantic_similarity_threshold: 0.7   #if semantic is in use
+
+# Embedding
+embedding:
+  model_name: "BAAI/bge-m3"
+  fallback_model: "intfloat/multilingual-e5-base"
+  device: "cpu"  # or "cuda"
+  batch_size: 32
+  max_length: 512
+  query_prefix: "query: "
+  passage_prefix: "passage: "
+
+# Vector Store
+vectorstore:
+  type: "chromadb"
+  persist_directory: "./data/vectorstore"
+  collection_name: "bengali_documents"
+  distance_metric: "cosine"
+
+# Hybrid Retrieval
+retrieval:
+  dense_k: 20
+  bm25_k: 20
+  final_k: 5
+  confidence_threshold: 0.7
+  min_score: 0.3
+  
+  dense_weights:
+    dense: 0.6
+    bm25: 0.4
+
+# Reranking
+reranking:
+  enabled: true
+  model_name: "BAAI/bge-reranker-v2-m3"
+  fallback_model: "BAAI/bge-reranker-base"
+  top_k: 10
+
+# Context Compression
+compression:
+  enabled: true
+  max_tokens: 2000
+  method: "sentence_compression"
+  relevance_threshold: 0.6
+
+# LLM Generation
+llm:
+  provider: "groq"
+  groq_api_key: "${GROQ_API_KEY}"
+  primary_model: "openai/gpt-oss-120b"
+  fallback_model: "qwen/qwen3.6-27b"
+  final_fallback: "openai/gpt-oss-20b"
+  temperature: 0.1
+  max_tokens: 512
+  top_p: 0.9
+  async_inference: true
+
+# Memory
+memory:
+  short_term_turns: 10
+  sqlite_path: "./data/memory.db"
+  session_timeout_hours: 24
+
+# API
+api:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  cors_origins: ["*"]
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "./logs/app.log"
+
+# Evaluation
+evaluation:
+  test_questions_path: "./data/test_questions.json"
+  results_path: "./data/evaluation_results.json"
+  metrics:
+    - recall@5
+    - precision@5
+    - mrr
+    - ndcg
+    - exact_match
+    - f1_score
+    - groundedness
+    - hallucination_rate

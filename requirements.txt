@@ -1,0 +1,58 @@
+# Core frameworks
+fastapi
+uvicorn
+pydantic
+
+# PDF processing
+PyMuPDF
+pypdf2
+
+# OCR
+paddleocr
+paddlepaddle
+easyocr
+pillow
+opencv-python
+
+# NLP and embeddings
+sentence-transformers
+transformers
+torch
+numpy
+scikit-learn
+
+# Vector database
+chromadb
+rank-bm25
+
+# LLM clients
+groq
+
+# Memory and database
+sqlite3
+
+# Configuration and utilities
+python-dotenv
+pyyaml
+python-multipart
+
+# Evaluation
+pandas
+matplotlib
+seaborn
+nltk
+
+# Testing
+pytest
+pytest-asyncio
+httpx
+
+# Monitoring and logging
+python-json-logger
+prometheus-client
+
+# Development
+black
+isort
+flake8
+mypy

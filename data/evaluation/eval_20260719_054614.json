@@ -1,0 +1,99 @@
+{
+  "run_timestamp": "2026-07-19T05:46:14",
+  "groq_model": "openai/gpt-oss-120b",
+  "n_queries": 5,
+  "results": [
+    {
+      "question": "মাদাম লোইসেলের স্বামীর পেশা কী ছিল?",
+      "expected_answer": "কেরানি",
+      "generated_answer": "মাদাম লোইসেলের স্বামী **একজন অফিস কর্মী** ছিলেন – তিনি “আপিসে” (অফিসে) কাজ করতেন【Excerpt 1】।",
+      "question_type": "fact",
+      "is_high_risk": false,
+      "confidence": 0.75,
+      "llm_validated": false,
+      "retried": false,
+      "latency_seconds": 36.14610695838928,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.1,
+        "answer_correctness": 1.0
+      }
+    },
+    {
+      "question": "মাদাম লোইসেলের স্বামী তাকে 'বলে' যাওয়ার জন্য কী পরার পরামর্শ দিয়েছিলেন?",
+      "expected_answer": "সুন্দর পোশাক",
+      "generated_answer": "মাদাম লোইসেলের স্বামী তাকে বললেন, “আমি তোমাকে চারশত ডলার দেব, কিন্তু একটি খুব সুন্দর পোশাক কিনে নেও।” এতে তিনি বলার অর্থ ছিল, বল‑নাচে যাওয়ার জন্য তাকে একটি চমৎকার পোশাক পরতে পরামর্শ দিলেন【Excerpt 1】.",
+      "question_type": "fact",
+      "is_high_risk": false,
+      "confidence": 0.75,
+      "llm_validated": false,
+      "retried": false,
+      "latency_seconds": 20.114999055862427,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevance": 0.96,
+        "context_precision": 0.0,
+        "answer_correctness": 1.0
+      }
+    },
+    {
+      "question": "যদি মাদাম লোইসেল সেদিন রাতে হারটি না হারাতেন, তাহলে তার জীবন কেমন হতো?",
+      "expected_answer": "স্বাভাবিক ও সম্পদের মায়ায় ভরা থাকতো",
+      "generated_answer": "**সংক্ষিপ্ত উত্তর:**  \nযদি মাদাম লোইসেল হারটি না হারাতেন, তবে তিনি সম্ভবত তার পূর্বের সমৃদ্ধ ও প্রশংসিত অবস্থায়ই থাকতেন; দারিদ্র্যের কষ্ট, ঘর‑কাজের ঝামেলা ও আত্ম‑সম্মানের ক্ষতি তার জীবনে ঘটত না।  \n\n**ব্যাখ্যা (প্রমাণ‑ভিত্তিক):**  \n\n1. **হার‑হারা পরিণতি** – Excerpt 3‑এ দেখা যায় যে হার হারানোর পরে “মাদাম লোইসেল … গরিব গৃহস্থঘরের শক্ত, কর্মঠ ও অমার্জিত মেয়ের মতো হয়ে গেছে” এবং “চুল অবিন্যস্ত, হাত লাল, বড়‑বড় কলসিতে জল এনে মেঝে ধোয়” ইত্যাদি বর্ণনা তার দারিদ্র্যের অবস্থা প্রকাশ করে।  \n\n2. **হার‑ন হারানোর সম্ভাব্য বিকল্প** – Excerpt 1‑এর প্রশ্নমূলক অংশে বলা হয়েছে, “যদি সে গলার সেই হারখানা না হারাত তাহলে কেমন হতো? … সামান্য একটি বস্তুতে কী করে একজন ধ্বংস হয়ে যেতে আবার বীচতেও পারে!” এখানে ইঙ্গিত করা হয়েছে যে হার না হারালে “ধ্বংস” না হয়ে “বীচ” (সফলতা, প্রশংসা) বজায় থাকত।  \n\n3. **প্রশংসা ও সুখের স্মৃতি** – Excerpt 1‑এর পূর্ব‑প্রসঙ্গ ও পর‑প্রসঙ্গেও উল্লেখ আছে যে হার‑হারা আগে “বিকেল‑অনুষ্ঠান ও ‘বল’ নাচে তাকে এত সুন্দর দেখাচ্ছিল ও এমন অতিরিক্ত প্রশংসা পেয়েছিল”। তাই হার না হারালে এই প্রশংসা ও আত্ম‑বিশ্বাস বজায় থাকত।  \n\n**",
+      "question_type": "inference",
+      "is_high_risk": true,
+      "confidence": 0.78,
+      "llm_validated": true,
+      "retried": false,
+      "latency_seconds": 26.13192367553711,
+      "scores": {
+        "faithfulness": 0.67,
+        "answer_relevance": 0.96,
+        "context_precision": 0.17,
+        "answer_correctness": 1.0
+      }
+    },
+    {
+      "question": "মাদাম লোইসেল 'বল'-এ যাওয়ার জন্য তার স্বামী তাকে কত টাকা দিতে ইচ্ছা প্রকাশ করেন?",
+      "expected_answer": " চারশত ফ্রাঁ।",
+      "generated_answer": "মাদাম লোইসেলকে ‘বল’‑এ যাওয়ার জন্য তার স্বামী **চারশত St** (৪০০ St) দিতে ইচ্ছা প্রকাশ করেন【Excerpt 1】।",
+      "question_type": "fact",
+      "is_high_risk": false,
+      "confidence": 0.75,
+      "llm_validated": false,
+      "retried": false,
+      "latency_seconds": 21.57413148880005,
+      "scores": {
+        "faithfulness": 0.0,
+        "answer_relevance": 1.0,
+        "context_precision": 0.0,
+        "answer_correctness": 1.0
+      }
+    },
+    {
+      "question": "গল্পের শেষে মাদাম ফোরসটিয়ার মাদাম লোইসেলকে হারটি সম্পর্কে কী জানান?",
+      "expected_answer": " হারটি নকল ছিল",
+      "generated_answer": "গল্পের শেষে মাদাম ফোরস্টিয়ার মাদাম লোইসেলকে জানান যে, তিনি যে হারটি ফিরিয়ে দিতে চেয়েছিলেন তা আসলে আসল হীরার নয়—“এ দুটি এক রকম ছিল” (অর্থাৎ হারটি নকল)【Excerpt 2】। তাই লোইসেল বুঝতে পারে যে তিনি ব্যয় করা সব অর্থ ও কষ্টই নকল হারের জন্যই হয়েছে।",
+      "question_type": "fact",
+      "is_high_risk": false,
+      "confidence": 0.75,
+      "llm_validated": false,
+      "retried": false,
+      "latency_seconds": 22.120485544204712,
+      "scores": {
+        "faithfulness": 0.33,
+        "answer_relevance": 0.97,
+        "context_precision": 0.0,
+        "answer_correctness": 1.0
+      }
+    }
+  ],
+  "averages": {
+    "faithfulness": 0.2,
+    "answer_relevance": 0.978,
+    "context_precision": 0.054000000000000006,
+    "answer_correctness": 1.0,
+    "latency_seconds": 25.217529344558717
+  }
+}

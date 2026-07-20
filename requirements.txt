@@ -1,58 +1,28 @@
-# Core frameworks
-fastapi
-uvicorn
-pydantic
+# --- Web framework / server -----------------------------------------------
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+python-multipart>=0.0.9      # required by FastAPI for UploadFile / form parsing
+pydantic>=2.7,<3.0
+python-dotenv>=1.0,<2.0
 
-# PDF processing
-PyMuPDF
-pypdf2
+# --- OCR / PDF ingestion -----------------------------------------------------
+pytesseract>=0.3.10
+pdf2image>=1.17
+opencv-python-headless>=4.9
 
-# OCR
-paddleocr
-paddlepaddle
-easyocr
-pillow
-opencv-python
+# --- Embeddings / reranking (local models, CPU) ------------------------------
+sentence-transformers>=3.0
 
-# NLP and embeddings
-sentence-transformers
-transformers
-torch
-numpy
-scikit-learn
+# --- Vector store / sparse retrieval -----------------------------------------
+chromadb==0.5.5
+rank_bm25>=0.2.2
 
-# Vector database
-chromadb
-rank-bm25
+# --- Query understanding ------------------------------------------------------
+langdetect>=1.0.9
+tiktoken>=0.7
 
-# LLM clients
-groq
+# --- LLM ----------------------------------------------------------------------
+groq>=0.9
 
-# Memory and database
-sqlite3
-
-# Configuration and utilities
-python-dotenv
-pyyaml
-python-multipart
-
-# Evaluation
-pandas
-matplotlib
-seaborn
-nltk
-
-# Testing
-pytest
-pytest-asyncio
-httpx
-
-# Monitoring and logging
-python-json-logger
-prometheus-client
-
-# Development
-black
-isort
-flake8
-mypy
+# --- Misc ----------------------------------------------------------------------
+tqdm>=4.66

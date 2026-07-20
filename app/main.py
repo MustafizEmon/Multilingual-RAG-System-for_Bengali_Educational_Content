@@ -1,62 +1,63 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from __future__ import annotations
 from contextlib import asynccontextmanager
 
-from app.api.routes import router
-from app.core.config import config
-from app.core.logging import logger
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.api.v1.router import api_router
+from app.core.config import SETTINGS, get_logger
+from app.modules.embeddings import EMBEDDER
+from app.modules.reranker import RERANKER
+
+_log = get_logger("main")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan manager."""
-    # Startup
-    logger.info("Starting RAG System", 
-                version=config.get("app.version", "1.0.0"),
-                debug=config.get("app.debug", False))
+    _log.info("Starting up — preloading embedding and reranker models...")
+    EMBEDDER.load()
+    RERANKER.load()
+    _log.info("Models ready. Groq model: %s", SETTINGS.groq_model)
     yield
-    # Shutdown
-    logger.info("Shutting down RAG System")
+    _log.info("Shutting down.")
 
-# Create FastAPI app
+
 app = FastAPI(
-    title="Multilingual RAG System",
-    description="Production-ready RAG system for Bengali/English educational content",
-    version=config.get("app.version", "1.0.0"),
-    lifespan=lifespan
+    title="Multilingual Educational RAG API — Bangla + English",
+    description=(
+        "Production-quality Retrieval-Augmented Generation service for Bangla "
+        "educational content (literature, history, science, sociology, and general "
+        "education), with English/mixed query support. Upload any Bangla PDF (any "
+        "subject or genre) via /api/v1/documents/upload, then ask questions via "
+        "/api/v1/query. See the README for full architecture and setup."
+    ),
+    version="1.0.0",
+    lifespan=lifespan,
 )
 
-# CORS middleware
+# Note: CORS is wide open by default (configurable via API_CORS_ORIGINS) so a future
+# React (or any other) frontend can call this API directly during development.
+# Tighten this to your real frontend origin(s) before deploying publicly.
+_origins = (
+    ["*"] if SETTINGS.api_cors_origins.strip() == "*"
+    else [o.strip() for o in SETTINGS.api_cors_origins.split(",") if o.strip()]
+)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=config.get("api.cors_origins", ["*"]),
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
-app.include_router(router, prefix="/api/v1")
+app.include_router(api_router, prefix="/api/v1")
 
-@app.get("/")
-async def root():
+
+@app.get("/", tags=["Root"], summary="Service info")
+async def root() -> dict:
+    """Basic service pointer — see /docs for the full interactive API reference."""
     return {
-        "service": "Multilingual RAG System",
-        "version": config.get("app.version", "1.0.0"),
-        "status": "running",
-        "endpoints": {
-            "/api/v1/ask": "Single-turn QA",
-            "/api/v1/chat": "Multi-turn conversation",
-            "/api/v1/ingest": "Document ingestion",
-            "/api/v1/health": "Health check",
-            "/api/v1/metrics": "Metrics"
-        }
+        "service": "Multilingual Educational RAG API",
+        "docs": "/docs",
+        "health": "/api/v1/health",
     }
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(
-        "app.main:app",
-        host=config.get("api.host", "0.0.0.0"),
-        port=config.get("api.port", 8000),
-        reload=config.get("app.debug", False)
-    )
